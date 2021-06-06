@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
 
     fun goToHome(){
         val login = Intent(this, HomeActivity::class.java)
-        login.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(login)
         finish()
         finishAffinity()

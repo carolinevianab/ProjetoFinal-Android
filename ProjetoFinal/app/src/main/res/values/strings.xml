@@ -16,4 +16,13 @@
     <string name="search">Search</string>
     <string name="myPurchases">My Purchases</string>
     <string name="myCart">My Cart</string>
+    <string name="addToCart">add to cart</string>
+    <string name="emptyCart">Your cart is empty.</string>
+    <string name="endPurchase">Finish your purchase</string>
+    <string name="finishPurchase">Finish</string>
+    <string name="myHouse">House 1</string>
+    <string name="fakeAddress">Rua Minha, 123, Vila Nossa</string>
+    <string name="localEntrega">Local de entrega:</string>
+    <string name="purchaseSucess">Your purchase was made sucessfully!</string>
+    <string name="backToHome">Go back to Home</string>
 </resources>

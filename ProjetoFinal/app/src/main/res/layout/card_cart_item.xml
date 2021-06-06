@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/cardProductImage"
+            android:id="@+id/cardCartProductImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/cardProductTitle"
+                android:id="@+id/cardCartProductTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -39,18 +39,19 @@
                 android:focusable="true"/>
 
             <TextView
-                android:id="@+id/cardProductPrice"
+                android:id="@+id/cardCartProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/price" />
 
             <TextView
-                android:id="@+id/cardBookId"
+                android:id="@+id/cardCartQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="8sp" />
+                android:layout_margin="8dp"
+                android:text="Quantity: "
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

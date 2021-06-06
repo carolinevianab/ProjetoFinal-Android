@@ -12,6 +12,11 @@ android {
         enabled = true
     }
 
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
+
     defaultConfig {
         applicationId "com.example.projetofinal"
         minSdkVersion 23

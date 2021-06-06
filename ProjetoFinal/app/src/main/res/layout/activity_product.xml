@@ -39,6 +39,13 @@
             android:layout_margin="8dp"
             android:orientation="vertical">
 
+            <ProgressBar
+                android:id="@+id/progressDetails"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progressTint="#7518DF" />
+
             <ImageView
                 android:id="@+id/imgProductDetail"
                 android:layout_width="match_parent"
@@ -64,6 +71,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description" />
+
+            <Button
+                android:id="@+id/btnAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/addToCart" />
 
         </LinearLayout>
 

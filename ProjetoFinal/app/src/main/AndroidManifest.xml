@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoFinal">
-        <activity android:name=".ProductActivity"></activity>
+        <activity android:name=".FinishedPurchaseActivity"></activity>
+        <activity android:name=".FinishPurchaseActivity" />
+        <activity android:name=".ProductActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

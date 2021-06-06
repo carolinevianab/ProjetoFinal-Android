@@ -22,16 +22,15 @@ class HomeFragment : Fragment() {
     }
 
     fun setIntent(card: CardItemBinding){
+        val productInfo = Intent(this.activity, ProductActivity::class.java)
+        productInfo.putExtra("idBook", card.cardBookId.text)
         card.cardProductTitle.setOnClickListener {
-            val productInfo = Intent(this.activity, ProductActivity::class.java)
             startActivity(productInfo)
         }
         card.cardProductImage.setOnClickListener {
-            val productInfo = Intent(this.activity, ProductActivity::class.java)
             startActivity(productInfo)
         }
         card.cardProductPrice.setOnClickListener {
-            val productInfo = Intent(this.activity, ProductActivity::class.java)
             startActivity(productInfo)
         }
         binding.offersContainer.addView(card.root)

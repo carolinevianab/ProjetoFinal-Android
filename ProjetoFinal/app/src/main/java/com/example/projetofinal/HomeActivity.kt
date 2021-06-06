@@ -3,11 +3,17 @@ package com.example.projetofinal
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.example.projetofinal.databinding.ActivityHomeBinding
 import com.example.projetofinal.databinding.CardItemBinding
+import com.example.projetofinal.model.Produto
+import com.example.projetofinal.services.ProductService
+import com.google.android.material.snackbar.Snackbar
+import retrofit2.*
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
@@ -16,7 +22,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         supportFragmentManager
             .beginTransaction()
@@ -77,11 +82,64 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        // Vai precisar fazer o foreach aqui
-        val card = CardItemBinding.inflate(layoutInflater)
-        homeFrag.setIntent(card)
+        if (homeFrag.binding.offersContainer.childCount == 0) {
+
+            val retrofit = Retrofit.Builder()
+                    .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+            val service = retrofit.create(ProductService::class.java)
+
+            val call = service.listProducts()
+
+            val callback = object : Callback<List<Produto>> {
+                override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+                    if (response.isSuccessful) {
+                        val productsList = response.body()
+                        updateUI(productsList)
+                    }
+                    else {
+                        Snackbar.make(
+                                homeFrag.binding.offersContainer,
+                                "Não foi possível conectar-se ao servidor.",
+                                Snackbar.LENGTH_LONG
+                        ).show()
+
+                        Log.e("ERRO-Retrofit", response.errorBody().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
+                    Snackbar.make(
+                            homeFrag.binding.offersContainer,
+                            "Não foi possível atualizar os produtos.",
+                            Snackbar.LENGTH_LONG
+                    ).show()
+
+                    Log.e("ERRO-Retrofit", "Falha na conexão", t)
+                }
+            }
+            call.enqueue(callback)
+
+        }
+
 
     }
+
+    fun updateUI(productList: List<Produto>?){
+        // Vai precisar fazer o foreach aqui
+
+        productList?.forEach {
+            val card = CardItemBinding.inflate(layoutInflater)
+            card.cardProductTitle.text = it.Titulo
+            card.cardProductPrice.text = it.preco.toString()
+            card.cardBookId.text = it.id.toString()
+            homeFrag.setIntent(card)
+        }
+
+    }
+
 
 
 }
