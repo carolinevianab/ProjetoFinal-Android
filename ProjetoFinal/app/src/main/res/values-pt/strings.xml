@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProjetoFinal</string>
+    <string name="offersMessage">Ofertas!</string>
+    <string name="categoriesMessage">Categorias</string>
+    <string name="logInMessage">Não quer entrar agora?</string>
+    <string name="maybeLaterButton">Talvez depois</string>
+    <string name="logInButton">Entrar na minha conta</string>
+    <string name="myPurchasesDrawer">Minhas compras</string>
+    <string name="categoryDrawer">Categoria</string>
+    <string name="cartDrawer">Carrinho</string>
+    <string name="homeDrawer">Início</string>
+    <string name="profileDrawer">Perfil</string>
+    <string name="price">Preço</string>
+    <string name="title">Título</string>
+    <string name="hello_blank_fragment">Olá fragmento em branco</string>
+    <string name="search">Buscar</string>
+    <string name="myPurchases">Minhas Compras</string>
+    <string name="myCart">Meu carrinho</string>
+</resources>

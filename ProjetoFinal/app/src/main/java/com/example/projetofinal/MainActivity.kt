@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
         else {
             goToHome()
         }
+
+        binding.btnMaybeLater.setOnClickListener {
+            goToHome()
+        }
     }
 
     val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
@@ -46,9 +50,10 @@ class MainActivity : AppCompatActivity() {
 
     fun goToHome(){
         val login = Intent(this, HomeActivity::class.java)
-        login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        login.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(login)
         finish()
+        finishAffinity()
     }
 
     fun getUser(): FirebaseUser? {

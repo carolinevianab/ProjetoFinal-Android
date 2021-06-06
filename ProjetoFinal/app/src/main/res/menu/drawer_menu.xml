@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/itemProfile"
+                android:icon="@drawable/user_account"
+                android:title="@string/profileDrawer"
+                 />
+        </menu>
+    </item>
+
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/itemHome"
+                    android:icon="@drawable/home_icon"
+                    android:title="@string/homeDrawer" />
+                <item
+                    android:id="@+id/itemCart"
+                    android:icon="@drawable/shopping_cart"
+                    android:title="@string/cartDrawer" />
+                <item
+                    android:id="@+id/itemCategory"
+                    android:icon="@drawable/category_icon"
+                    android:title="@string/categoryDrawer" />
+                <item
+                    android:id="@+id/itemPurchases"
+                    android:icon="@drawable/shopping_bag"
+                    android:title="@string/myPurchasesDrawer" />
+            </group>
+        </menu>
+    </item>
+</menu>
