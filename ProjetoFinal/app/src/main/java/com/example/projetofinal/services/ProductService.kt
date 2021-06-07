@@ -1,6 +1,7 @@
 package com.example.projetofinal.services
 
 import com.example.projetofinal.model.AllPurchases
+import com.example.projetofinal.model.BooksBought
 import com.example.projetofinal.model.Produto
 import com.example.projetofinal.model.Purchase
 import retrofit2.Call
@@ -24,4 +25,7 @@ interface ProductService {
 
     @GET("/Compras/Users/{user}.json")
     fun getAllPurchase(@Path("user") user: String): Call<List<Purchase>>
+
+    @GET("/Compras/Users/{caminho}.json")
+    fun getAllBooks(@Path("caminho") caminho: String): Call<List<BooksBought>>
 }

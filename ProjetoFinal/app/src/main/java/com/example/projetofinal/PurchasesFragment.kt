@@ -16,11 +16,16 @@ import com.example.projetofinal.services.ProductService
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.HashMap
 
 class PurchasesFragment : Fragment() {
     lateinit var binding: FragmentPurchasesBinding
@@ -28,49 +33,31 @@ class PurchasesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentPurchasesBinding.inflate(inflater)
-        /*
+        updateList()
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(ProductService::class.java)
-
-        val call = service.getAllPurchase(getUser()!!.uid)
-
-        val callback = object : Callback<List<Purchase>> {
-            override fun onResponse(call: Call<List<Purchase>>, response: Response<List<Purchase>>) {
-                if (response.isSuccessful) {
-                    val productsList = response.body()
-                    updateList(productsList)
-                }
-                else {
-                    Snackbar.make(
-                        binding.purchasesContainer,
-                        "Não foi possível conectar-se ao servidor.",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-
-                    Log.e("ERRO-Retrofit", response.errorBody().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<List<Purchase>>, t: Throwable) {
-                Snackbar.make(
-                    binding.purchasesContainer,
-                    "Não foi possível atualizar os produtos.",
-                    Snackbar.LENGTH_LONG
-                ).show()
-
-                Log.e("ERRO-Retrofit", "Falha na conexão", t)
-            }
-        }
-        call.enqueue(callback)
-
-         */
 
         return binding.root
+    }
+
+    fun updateList(){
+        val user = getUser()
+        val databese = FirebaseDatabase.getInstance().reference.child("Compras").child("Users")
+                .child(user!!.uid).child("Compra")
+
+        val listener = object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                convertData(snapshot)
+            }
+
+        }
+
+        databese.addValueEventListener(listener)
+
+
     }
     /*
 
@@ -92,5 +79,22 @@ class PurchasesFragment : Fragment() {
     }
 
      */
+    fun getUser(): FirebaseUser? {
+        return FirebaseAuth.getInstance().currentUser
+    }
+
+    fun convertData(copiaDados: DataSnapshot){
+        copiaDados.children.forEach{
+            val id = it.key
+            val compra = CardItemBinding.inflate(layoutInflater)
+            compra.cardProductImage.setOnClickListener {
+                val intent = Intent(this.activity, PurchasedActivity::class.java)
+                intent.putExtra("compra", id)
+                startActivity(intent)
+            }
+            binding.purchasesContainer.addView(compra.root)
+
+        }
+    }
 
 }
