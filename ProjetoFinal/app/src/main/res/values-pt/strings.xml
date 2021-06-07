@@ -17,4 +17,12 @@
     <string name="search">Buscar</string>
     <string name="myPurchases">Minhas Compras</string>
     <string name="myCart">Meu carrinho</string>
+    <string name="saleOldPrice">De</string>
+    <string name="saleNewPrice">Por</string>
+    <string name="addToCart">Adicionar ao carrinho</string>
+    <string name="emptyCart">Seu carrinho está vazio</string>
+    <string name="endPurchase">Finalizar sua compra</string>
+    <string name="finishPurchase">Finalizar</string>
+    <string name="myHouse">Casa 1</string>
+    <string name="fakeAddress">Rua Minha, 123, Vila Nossa</string>
 </resources>

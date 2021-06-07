@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.example.projetofinal.databinding.ActivityHomeBinding
 import com.example.projetofinal.databinding.CardItemBinding
@@ -40,11 +41,12 @@ class HomeActivity : AppCompatActivity() {
         binding.navigationView.setNavigationItemSelectedListener{menuItem ->
             when (menuItem.itemId) {
                 R.id.itemHome -> {
-                    val homeFrag = HomeFragment()
                     supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.mainContainer, homeFrag)
                             .commit()
+                    homeFrag.binding.offersContainer.removeAllViews()
+                    getFromDatabase()
                 }
                 R.id.itemCart -> {
                     val cartFrag = CartFragment()
@@ -81,7 +83,10 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        getFromDatabase()
+    }
 
+    fun getFromDatabase(){
         if (homeFrag.binding.offersContainer.childCount == 0) {
 
             val retrofit = Retrofit.Builder()
@@ -123,18 +128,23 @@ class HomeActivity : AppCompatActivity() {
             call.enqueue(callback)
 
         }
-
-
     }
 
     fun updateUI(productList: List<Produto>?){
-        // Vai precisar fazer o foreach aqui
 
-        productList?.forEach {
+
+        if (productList == null){
+            return
+        }
+
+        for (i in 0..3) {
             val card = CardItemBinding.inflate(layoutInflater)
-            card.cardProductTitle.text = it.Titulo
-            card.cardProductPrice.text = it.preco.toString()
-            card.cardBookId.text = it.id.toString()
+            card.cardProductTitle.text = productList[i].Titulo
+            val price = String.format("%.2f",productList[i].preco)
+            val priceDiscount = String.format("%.2f", productList[i].preco - productList[i].desconto)
+            card.cardProductPrice.text = "De ${price} por ${priceDiscount}"
+            card.cardBookId.text = productList[i].id.toString()
+            card.cardBookId.visibility = View.INVISIBLE
             homeFrag.setIntent(card)
         }
 
