@@ -131,12 +131,13 @@ class ProductActivity : AppCompatActivity() {
     fun updateUI(info: Produto?){
         if (info != null) {
             binding.txtTitleProductDetail.text = info.Titulo
-            binding.txtPriceDetail.text = "\$ ${info.preco - info.desconto}"
+            val oldPrice = String.format("%.2f", info.preco)
+            val price = String.format("%.2f", info.preco - info.desconto)
+            binding.txtPriceDetail.text = "De \$ $oldPrice \nPor $price"
+            Picasso.get().load(info.Capa).into(binding.imgProductDetail)
             binding.txtDescriptionDetail.text = "Autor: ${info.Autor}\n" +
                     "Categoria: ${info.Categoria}\n" +
                     "Número de páginas: ${info.numPag}\n\n${info.Descricao}"
-            binding.imgProductDetail
-            Picasso.get().load(info.Capa).into(binding.imgProductDetail)
         }
     }
 }

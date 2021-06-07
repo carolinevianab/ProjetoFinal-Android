@@ -32,16 +32,24 @@ class HomeActivity : AppCompatActivity() {
             .replace(R.id.mainContainer, homeFrag)
             .commit()
 
-        binding.topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.app_bar_search -> {
-                    true
-                }
-                else -> {
-                    false
-                }
+
+
+        val search = findViewById<SearchView>(R.id.app_bar_search)
+        val context = this
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val intent = Intent(context, AllProductsActivity::class.java)
+                intent.putExtra("requestType", query)
+                startActivity(intent)
+                return true
             }
-        }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                //Log.e("e", newText.toString())
+                return false
+            }
+
+        })
 
 
         val w = ActionBarDrawerToggle(
@@ -81,6 +89,10 @@ class HomeActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.mainContainer, purFrag)
                         .commit()
+                }
+                R.id.itemProfile -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
                 }
 
             }
