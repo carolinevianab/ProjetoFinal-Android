@@ -10,5 +10,6 @@ data class Produto (
         var desconto: Double,
         var id: Int,
         var numPag: Int,
-        var preco: Double
+        var preco: Double,
+        var Capa: String
 )

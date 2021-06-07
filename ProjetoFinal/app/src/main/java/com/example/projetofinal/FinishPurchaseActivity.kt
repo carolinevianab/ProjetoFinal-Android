@@ -14,6 +14,8 @@ class FinishPurchaseActivity : AppCompatActivity() {
         binding = ActivityFinishPurchaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.cardHome.isChecked = true
+
         binding.btnFinishPurchase.setOnClickListener {
             Thread{
                 val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()

@@ -7,12 +7,15 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.example.projetofinal.databinding.ActivityHomeBinding
 import com.example.projetofinal.databinding.CardItemBinding
 import com.example.projetofinal.model.Produto
 import com.example.projetofinal.services.ProductService
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -29,6 +32,16 @@ class HomeActivity : AppCompatActivity() {
             .replace(R.id.mainContainer, homeFrag)
             .commit()
 
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.app_bar_search -> {
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
 
 
         val w = ActionBarDrawerToggle(
@@ -81,9 +94,11 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+
     override fun onResume() {
         super.onResume()
         getFromDatabase()
+
     }
 
     fun getFromDatabase(){
@@ -145,6 +160,7 @@ class HomeActivity : AppCompatActivity() {
             card.cardProductPrice.text = "De ${price} por ${priceDiscount}"
             card.cardBookId.text = productList[i].id.toString()
             card.cardBookId.visibility = View.INVISIBLE
+            Picasso.get().load(productList[i].Capa).into(card.cardProductImage)
             homeFrag.setIntent(card)
         }
 

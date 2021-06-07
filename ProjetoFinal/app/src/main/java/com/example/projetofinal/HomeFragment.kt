@@ -16,6 +16,22 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater)
 
+        binding.btnHomeCategoryAll.setOnClickListener {
+            val intent = Intent(this.activity, AllProductsActivity::class.java)
+            intent.putExtra("requestType", "All")
+            startActivity(intent)
+        }
+        binding.btnHomeCategoryFiction.setOnClickListener {
+            val intent = Intent(this.activity, AllProductsActivity::class.java)
+            intent.putExtra("requestType", "Ficção")
+            startActivity(intent)
+        }
+        binding.btnHomeCategoryThriller.setOnClickListener {
+            val intent = Intent(this.activity, AllProductsActivity::class.java)
+            intent.putExtra("requestType", "Suspense")
+            startActivity(intent)
+        }
+
 
         return binding.root
     }

@@ -50,12 +50,14 @@
                 android:id="@+id/imgProductDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/bookCoverDescription"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/txtTitleProductDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:text="@string/title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
@@ -63,6 +65,7 @@
                 android:id="@+id/txtPriceDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:text="$0,00"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
@@ -70,12 +73,14 @@
                 android:id="@+id/txtDescriptionDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description" />
+                android:layout_margin="8dp"
+                android:text="@string/description" />
 
             <Button
                 android:id="@+id/btnAddToCart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:text="@string/addToCart" />
 
         </LinearLayout>

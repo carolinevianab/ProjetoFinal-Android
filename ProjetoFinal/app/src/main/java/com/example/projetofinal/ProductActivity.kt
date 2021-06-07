@@ -13,6 +13,7 @@ import com.example.projetofinal.model.Produto
 import com.example.projetofinal.model.Produto_carrinho
 import com.example.projetofinal.services.ProductService
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -130,7 +131,12 @@ class ProductActivity : AppCompatActivity() {
     fun updateUI(info: Produto?){
         if (info != null) {
             binding.txtTitleProductDetail.text = info.Titulo
-            binding.txtDescriptionDetail.text = info.Descricao
+            binding.txtPriceDetail.text = "\$ ${info.preco - info.desconto}"
+            binding.txtDescriptionDetail.text = "Autor: ${info.Autor}\n" +
+                    "Categoria: ${info.Categoria}\n" +
+                    "Número de páginas: ${info.numPag}\n\n${info.Descricao}"
+            binding.imgProductDetail
+            Picasso.get().load(info.Capa).into(binding.imgProductDetail)
         }
     }
 }

@@ -52,14 +52,19 @@ class CartFragment : Fragment() {
             binding.txtEmptyCart.visibility = View.VISIBLE
         }
 
+        var total = 0.0
+
         products.forEach{
             val cardBinding = CardCartItemBinding.inflate(layoutInflater)
 
             cardBinding.cardCartProductTitle.text = it.titulo
+            // Precisa fazer um it.preco - it.desconto aqui
             cardBinding.cardCartProductPrice.text = it.preco.toString()
             cardBinding.cardCartQuantity.text = it.qtde.toString()
+            total += it.preco
 
             binding.cartContainer.addView(cardBinding.root)
         }
+        binding.txtSubtotal.text = "Total: $total"
     }
 }

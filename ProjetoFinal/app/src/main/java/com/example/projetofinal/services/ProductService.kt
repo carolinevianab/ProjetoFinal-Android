@@ -12,4 +12,7 @@ interface ProductService {
 
     @GET("/ListaProdutos/{id}.json")
     fun getBookInfo(@Path("id") id: String): Call<Produto>
+
+    @GET("/ListaProdutos/{id}.json")
+    fun getBooksForCategory(@Path("id") id: String): Call<Produto>
 }

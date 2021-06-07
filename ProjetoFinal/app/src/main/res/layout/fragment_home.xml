@@ -19,28 +19,34 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btnHomeCategory1"
+            android:id="@+id/btnHomeCategoryAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/viewAllCat"
+            android:textSize="12sp"
+            style="?attr/materialButtonOutlinedStyle"/>
 
         <Button
-            android:id="@+id/btnHomeCategory2"
+            android:id="@+id/btnHomeCategoryFiction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/catFiction"
+            android:textSize="12sp"
+            style="?attr/materialButtonOutlinedStyle"/>
 
         <Button
-            android:id="@+id/btnHomeCategory3"
+            android:id="@+id/btnHomeCategoryThriller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/catThriller"
+            android:textSize="12sp"
+            style="?attr/materialButtonOutlinedStyle"/>
     </LinearLayout>
 
     <TextView

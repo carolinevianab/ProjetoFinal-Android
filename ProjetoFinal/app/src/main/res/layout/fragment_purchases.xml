@@ -14,13 +14,14 @@
         android:text="@string/myPurchases"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/purchasesContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
-    </FrameLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

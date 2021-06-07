@@ -22,9 +22,18 @@
     <string name="finishPurchase">Finish</string>
     <string name="myHouse">House 1</string>
     <string name="fakeAddress">Mine Street, 123, Our Ville</string>
-    <string name="localEntrega">Local de entrega:</string>
     <string name="purchaseSucess">Your purchase was made sucessfully!</string>
     <string name="backToHome">Go back to Home</string>
     <string name="saleOldPrice">Old Price</string>
     <string name="saleNewPrice">For</string>
+    <string name="viewAllCat">View All Products</string>
+    <string name="catFiction">Fiction</string>
+    <string name="catThriller">Thriller</string>
+    <string name="localEntrega">Shipping To</string>
+    <string name="fantasyCat">Fantasy</string>
+    <string name="catAutoajuda">Self Help</string>
+    <string name="catAll">All Categories</string>
+    <string name="catOther">Other</string>
+    <string name="description">Description</string>
+    <string name="bookCoverDescription">Book Cover</string>
 </resources>

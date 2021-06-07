@@ -25,4 +25,16 @@
     <string name="finishPurchase">Finalizar</string>
     <string name="myHouse">Casa 1</string>
     <string name="fakeAddress">Rua Minha, 123, Vila Nossa</string>
+    <string name="localEntrega">Local de entrega</string>
+    <string name="purchaseSucess">Sua compra foi feita com sucesso!</string>
+    <string name="backToHome">Voltar para o Início</string>
+    <string name="viewAllCat">Ver todos os produtos</string>
+    <string name="catFiction">Ficção</string>
+    <string name="catThriller">Suspense</string>
+    <string name="fantasyCat">Fantasia</string>
+    <string name="catAutoajuda">Autoajuda</string>
+    <string name="catAll">Todas as categorias</string>
+    <string name="catOther">Outros</string>
+    <string name="description">Descrição</string>
+    <string name="bookCoverDescription">Capa do livro</string>
 </resources>
