@@ -31,7 +31,7 @@ class ProductActivity : AppCompatActivity() {
 
         val book = intent.getStringExtra("idBook")
         if (book != null) {
-            getBookInfo(book)
+            getBookInfo(book, 0)
         }
 
         binding.backButton.setOnClickListener {
@@ -40,33 +40,7 @@ class ProductActivity : AppCompatActivity() {
 
         binding.btnAddToCart.setOnClickListener{
             if (book != null) {
-                Thread{
-                    val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
-                    val p = db.Produto_carrinhoDAO().listNote(book.toInt())
-                    runOnUiThread {
-                        if(p == null){
-                            val id = book.toInt()
-                            val title = binding.txtTitleProductDetail.text.toString()
-                            val price = binding.txtPriceDetail.text.toString().replace("$", "").replace(",",".").toDouble()
-
-                            val product = Produto_carrinho(id, title, price, 1)
-
-                            insertIntoCart(product)
-                            Toast.makeText(this, "added to cart", Toast.LENGTH_SHORT).show()
-                        }else{
-                            Thread{
-                                val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
-                                val product = db.Produto_carrinhoDAO().listNote(book.toInt())
-                                runOnUiThread {
-                                    val q = product.qtde
-                                    product.qtde = q+1
-                                    updateProductQuantity(product)
-                                    Toast.makeText(this, "already added to cart, adding one more", Toast.LENGTH_LONG).show()
-                                }
-                            }.start()
-                        }
-                    }
-                }.start()
+                getBookInfo(book, 1)
             }
         }
     }
@@ -85,7 +59,40 @@ class ProductActivity : AppCompatActivity() {
         }.start()
     }
 
-    fun getBookInfo(bookId: String){
+    fun updateCart(info: Produto?, book: String){
+        Thread{
+            val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+            val p = db.Produto_carrinhoDAO().listNote(book.toInt())
+            runOnUiThread {
+                if(info != null) {
+                    if (p == null) {
+                        val id = book.toInt()
+                        val title = info.Titulo
+                        val price = (String.format("%.2f", info.preco - info.desconto)).toDouble()
+                        val img = info.Capa
+
+                        val product = Produto_carrinho(id, title, price, 1, img)
+
+                        insertIntoCart(product)
+                        Toast.makeText(this, "added to cart", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Thread {
+                            val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+                            val product = db.Produto_carrinhoDAO().listNote(book.toInt())
+                            runOnUiThread {
+                                val q = product.qtde
+                                product.qtde = q + 1
+                                updateProductQuantity(product)
+                                Toast.makeText(this, "already added to cart, adding one more", Toast.LENGTH_LONG).show()
+                            }
+                        }.start()
+                    }
+                }
+            }
+        }.start()
+    }
+
+    fun getBookInfo(bookId: String,i: Int){
         val retrofit = Retrofit.Builder()
             .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
             .addConverterFactory(GsonConverterFactory.create())
@@ -100,7 +107,11 @@ class ProductActivity : AppCompatActivity() {
                 binding.progressDetails.visibility = View.INVISIBLE
                 if (response.isSuccessful) {
                     val product = response.body()
-                    updateUI(product)
+                    if(i == 0) {
+                        updateUI(product)
+                    }else{
+                        updateCart(product,bookId)
+                    }
                 }
                 else {
                     Snackbar.make(

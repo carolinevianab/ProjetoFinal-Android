@@ -9,5 +9,6 @@ data class Produto_carrinho(
         var id : Int,
         var titulo: String,
         var preco: Double,
-        var qtde: Int
+        var qtde: Int,
+        var capa: String
 )

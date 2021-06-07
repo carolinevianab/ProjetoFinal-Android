@@ -11,6 +11,7 @@ import com.example.projetofinal.DB.AppDataBase
 import com.example.projetofinal.databinding.CardCartItemBinding
 import com.example.projetofinal.databinding.FragmentCartBinding
 import com.example.projetofinal.model.Produto_carrinho
+import com.squareup.picasso.Picasso
 
 
 class CartFragment : Fragment() {
@@ -46,7 +47,7 @@ class CartFragment : Fragment() {
     fun updateUi(products: List<Produto_carrinho>){
         val cardBinding = binding.cartContainer.removeAllViews()
 
-        if(!products.isEmpty()){
+        if(products.isNotEmpty()){
             binding.txtEmptyCart.visibility = View.INVISIBLE
         }else{
             binding.txtEmptyCart.visibility = View.VISIBLE
@@ -58,13 +59,14 @@ class CartFragment : Fragment() {
             val cardBinding = CardCartItemBinding.inflate(layoutInflater)
 
             cardBinding.cardCartProductTitle.text = it.titulo
-            // Precisa fazer um it.preco - it.desconto aqui
             cardBinding.cardCartProductPrice.text = it.preco.toString()
             cardBinding.cardCartQuantity.text = it.qtde.toString()
-            total += it.preco
+            Picasso.get().load(it.capa).into(cardBinding.cardCartProductImage)
+
+            total += (it.preco*it.qtde)
 
             binding.cartContainer.addView(cardBinding.root)
         }
-        binding.txtSubtotal.text = "Total: $total"
+        binding.txtSubtotal.text = String.format("%.2f", total)
     }
 }
