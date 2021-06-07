@@ -3,6 +3,8 @@ package com.example.projetofinal
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.room.Room
+import com.example.projetofinal.DB.AppDataBase
 import com.example.projetofinal.databinding.ActivityFinishPurchaseBinding
 
 class FinishPurchaseActivity : AppCompatActivity() {
@@ -13,8 +15,14 @@ class FinishPurchaseActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnFinishPurchase.setOnClickListener {
-            val intent = Intent(this, FinishedPurchaseActivity::class.java)
-            startActivity(intent)
+            Thread{
+                val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+                db.Produto_carrinhoDAO().cleanCart()
+                runOnUiThread {
+                    val intent = Intent(this, FinishedPurchaseActivity::class.java)
+                    startActivity(intent)
+                }
+            }.start()
         }
 
         binding.backButtonPurchase.setOnClickListener {

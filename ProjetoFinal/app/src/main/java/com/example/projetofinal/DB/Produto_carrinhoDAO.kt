@@ -16,4 +16,7 @@ interface Produto_carrinhoDAO {
 
     @Query(value = "select * from Produto_carrinho where id = :id")
     fun listNote(id: Int): Produto_carrinho
+
+    @Query(value = "delete from Produto_carrinho")
+    fun cleanCart()
 }
