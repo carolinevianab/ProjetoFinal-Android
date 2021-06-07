@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.room.Room
+import com.example.projetofinal.DB.AppDataBase
 import com.example.projetofinal.databinding.ActivityProductBinding
 import com.example.projetofinal.model.Produto
+import com.example.projetofinal.model.Produto_carrinho
 import com.example.projetofinal.services.ProductService
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -13,6 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.concurrent.thread
 
 
 class ProductActivity : AppCompatActivity() {
@@ -31,6 +37,51 @@ class ProductActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.btnAddToCart.setOnClickListener{
+            if (book != null) {
+                Thread{
+                    val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+                    val p = db.Produto_carrinhoDAO().listNote(book.toInt())
+                    runOnUiThread {
+                        if(p == null){
+                            val id = book.toInt()
+                            val title = binding.txtTitleProductDetail.text.toString()
+                            val price = binding.txtPriceDetail.text.toString().replace("$", "").replace(",",".").toDouble()
+
+                            val product = Produto_carrinho(id, title, price, 1)
+
+                            insertIntoCart(product)
+                            Toast.makeText(this, "added to cart", Toast.LENGTH_SHORT).show()
+                        }else{
+                            Thread{
+                                val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+                                val product = db.Produto_carrinhoDAO().listNote(book.toInt())
+                                runOnUiThread {
+                                    val q = product.qtde
+                                    product.qtde = q+1
+                                    updateProductQuantity(product)
+                                    Toast.makeText(this, "already added to cart, adding one more", Toast.LENGTH_LONG).show()
+                                }
+                            }.start()
+                        }
+                    }
+                }.start()
+            }
+        }
+    }
+
+    fun updateProductQuantity(product: Produto_carrinho){
+        Thread{
+            val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+            db.Produto_carrinhoDAO().update(product)
+        }.start()
+    }
+
+    fun insertIntoCart(product: Produto_carrinho){
+        Thread{
+            val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+            db.Produto_carrinhoDAO().insert(product)
+        }.start()
     }
 
     fun getBookInfo(bookId: String){
