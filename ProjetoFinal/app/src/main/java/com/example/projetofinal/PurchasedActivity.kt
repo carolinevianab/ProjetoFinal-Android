@@ -19,10 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 class PurchasedActivity : AppCompatActivity() {
@@ -44,51 +41,46 @@ class PurchasedActivity : AppCompatActivity() {
                 .child(user!!.uid).child("Compra").child(extra!!).child("Books")
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
         val service = retrofit.create(ProductService::class.java)
 
         val call = service.getAllBooks("${user!!.uid}/Compra/${extra!!}/Books")
+        //Log.e("teste", extra.toString())
 
         val callback = object : Callback<List<BooksBought>> {
-            override fun onResponse(call: Call<List<BooksBought>>, response: Response<List<BooksBought>>) {
-                if (response.isSuccessful) {
-                    val productsList = response.body()
-                    updateUI(productsList)
-                }
-                else {
-                    Snackbar.make(
-                            binding.purchasesContainer,
-                            "Não foi possível conectar-se ao servidor.",
-                            Snackbar.LENGTH_LONG
-                    ).show()
-
-                    Log.e("ERRO-Retrofit", response.errorBody().toString())
-                }
-            }
-
             override fun onFailure(call: Call<List<BooksBought>>, t: Throwable) {
                 Snackbar.make(
-                        binding.purchasesContainer,
-                        "Não foi possível atualizar os produtos.",
-                        Snackbar.LENGTH_LONG
+                    binding.purchasesContainer,
+                    "Não foi possível atualizar os produtos.",
+                    Snackbar.LENGTH_LONG
                 ).show()
 
                 Log.e("ERRO-Retrofit", "Falha na conexão", t)
             }
+
+            override fun onResponse(
+                call: Call<List<BooksBought>>,
+                response: Response<List<BooksBought>>
+            ) {
+                if (response.isSuccessful){
+                    val productList = response.body()
+                    Log.e("teste", productList.toString())
+                    getBooksFromPurchase(productList)
+                }
+            }
+
         }
+
         call.enqueue(callback)
+
 
     }
 
-    fun updateUI(list: List<BooksBought>?){
-        if (list == null){
-            return
-        }
-
-        list.forEach {
+    fun getBooksFromPurchase(purchase: List<BooksBought>?){
+        purchase?.forEach {
 
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
@@ -97,25 +89,9 @@ class PurchasedActivity : AppCompatActivity() {
 
             val service = retrofit.create(ProductService::class.java)
 
-            val call = service.getBookInfo(it.bookId.toString())
+            val call = service.getBookInfo(it.BookId.toString())
 
             val callback = object : Callback<Produto> {
-                override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
-                    if (response.isSuccessful) {
-                        val productsList = response.body()
-                        updateUI2(productsList)
-                    }
-                    else {
-                        Snackbar.make(
-                            binding.purchasesContainer,
-                            "Não foi possível conectar-se ao servidor.",
-                            Snackbar.LENGTH_LONG
-                        ).show()
-
-                        Log.e("ERRO-Retrofit", response.errorBody().toString())
-                    }
-                }
-
                 override fun onFailure(call: Call<Produto>, t: Throwable) {
                     Snackbar.make(
                         binding.purchasesContainer,
@@ -125,15 +101,28 @@ class PurchasedActivity : AppCompatActivity() {
 
                     Log.e("ERRO-Retrofit", "Falha na conexão", t)
                 }
+
+                override fun onResponse(
+                    call: Call<Produto>,
+                    response: Response<Produto>
+                ) {
+                    if (response.isSuccessful){
+                        val product = response.body()
+                        Log.e("teste", product.toString())
+                        updateUI(product)
+                    }
+                }
+
             }
+
             call.enqueue(callback)
 
         }
-
-
     }
 
-    fun updateUI2(book: Produto?){
+
+
+    fun updateUI(book: Produto?){
         if (book == null){
             return
         }
@@ -147,6 +136,8 @@ class PurchasedActivity : AppCompatActivity() {
 
         binding.purchasesContainer.addView(card.root)
     }
+
+
 
     fun getUser(): FirebaseUser? {
         return FirebaseAuth.getInstance().currentUser

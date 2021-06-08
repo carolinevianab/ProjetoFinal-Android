@@ -57,8 +57,8 @@ class FinishPurchaseActivity : AppCompatActivity() {
             //val newPath = novoNo.child(purchasee.purId)
             var count = 0
             productList.forEach {
-                val book = BooksBought(bookId = it.id, qtd = it.qtde)
-                novoNo.child("Books").child(count.toString()).push().setValue(book)
+                novoNo.child("Books").child(count.toString()).child("BookId").setValue(it.id)
+                novoNo.child("Books").child(count.toString()).child("qtd").setValue(it.qtde)
                 count += 1
             }
 

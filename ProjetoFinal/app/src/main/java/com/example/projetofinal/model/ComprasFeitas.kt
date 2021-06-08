@@ -1,7 +1,7 @@
 package com.example.projetofinal.model
 
 data class BooksBought (
-    var bookId: Int,
+    var BookId: Int,
     var qtd: Int
 )
 
