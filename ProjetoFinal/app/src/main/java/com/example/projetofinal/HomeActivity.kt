@@ -31,9 +31,7 @@ class HomeActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.mainContainer, homeFrag)
             .commit()
-        binding.topAppBar.title = "Home"
-
-
+        binding.topAppBar.title = getString(R.string.homeDrawer)
 
         val search = findViewById<SearchView>(R.id.app_bar_search)
         val context = this
@@ -46,7 +44,6 @@ class HomeActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                //Log.e("e", newText.toString())
                 return false
             }
 
@@ -69,7 +66,7 @@ class HomeActivity : AppCompatActivity() {
                             .commit()
                     homeFrag.binding.offersContainer.removeAllViews()
                     getFromDatabase()
-                    binding.topAppBar.title = "Home"
+                    binding.topAppBar.title = getString(R.string.homeDrawer)
                 }
                 R.id.itemCart -> {
                     val cartFrag = CartFragment()
@@ -77,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.mainContainer, cartFrag)
                         .commit()
-                    binding.topAppBar.title = "Cart"
+                    binding.topAppBar.title = getString(R.string.cartDrawer)
                 }
                 R.id.itemCategory -> {
                     val catFrag = CategoryFragment()
@@ -85,7 +82,7 @@ class HomeActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.mainContainer, catFrag)
                         .commit()
-                    binding.topAppBar.title = "Category"
+                    binding.topAppBar.title = getString(R.string.categoryDrawer)
                 }
                 R.id.itemPurchases -> {
                     val purFrag = PurchasesFragment()
@@ -93,7 +90,7 @@ class HomeActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.mainContainer, purFrag)
                         .commit()
-                    binding.topAppBar.title = "My Purchases"
+                    binding.topAppBar.title = getString(R.string.myPurchasesDrawer)
                 }
                 R.id.itemProfile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
@@ -174,7 +171,7 @@ class HomeActivity : AppCompatActivity() {
             card.cardProductTitle.text = productList[i].Titulo
             val price = String.format("%.2f",productList[i].preco)
             val priceDiscount = String.format("%.2f", productList[i].preco - productList[i].desconto)
-            card.cardProductPrice.text = "De ${price} por ${priceDiscount}"
+            card.cardProductPrice.text = "${getString(R.string.saleOldPrice)} \$ ${price} ${getString(R.string.saleNewPrice)} \$ ${priceDiscount}"
             card.cardBookId.text = productList[i].id.toString()
             card.cardBookId.visibility = View.INVISIBLE
             Picasso.get()

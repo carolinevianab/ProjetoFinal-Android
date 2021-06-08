@@ -20,6 +20,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:background="@android:color/transparent"
             android:elevation="0dp"
+            app:title="@string/myPurchases"
             />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -28,14 +29,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
         <LinearLayout
-            android:id="@+id/purchasesContainer"
+            android:id="@+id/outerContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txtPurchaseDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <LinearLayout
+                android:id="@+id/purchasesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="vertical">
+
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

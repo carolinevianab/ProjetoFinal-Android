@@ -38,4 +38,5 @@
     <string name="bookCoverDescription">Book Cover</string>
     <string name="activeUser">Logged in as:</string>
     <string name="sign_out">Sign Out</string>
+    <string name="purchase">Purchase #</string>
 </resources>

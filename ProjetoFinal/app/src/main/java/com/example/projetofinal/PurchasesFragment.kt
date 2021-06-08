@@ -59,41 +59,36 @@ class PurchasesFragment : Fragment() {
 
 
     }
-    /*
 
-    fun updateList(list: List<Purchase>?){
-        list?.forEach {purchase ->
-            val compra = CardItemBinding.inflate(layoutInflater)
-            compra.cardProductImage.setOnClickListener {
-                val intent = Intent(this.activity, PurchasedActivity::class.java)
-                intent.putExtra("compra", purchase.purId)
-                startActivity(intent)
-            }
-            binding.purchasesContainer.addView(compra.root)
-        }
-
-    }
-
-    fun getUser(): FirebaseUser? {
-        return FirebaseAuth.getInstance().currentUser
-    }
-
-     */
     fun getUser(): FirebaseUser? {
         return FirebaseAuth.getInstance().currentUser
     }
 
     fun convertData(copiaDados: DataSnapshot){
+        var counter = 1
         copiaDados.children.forEach{
             val id = it.key
             val compra = CardItemBinding.inflate(layoutInflater)
+            compra.cardProductImage.setImageResource(R.drawable.shopping_bag)
+            compra.cardProductTitle.text = "${getString(R.string.purchase)}${counter}"
+            compra.cardProductPrice.text = id.toString()
+            compra.cardBookId.visibility = View.INVISIBLE
+
+            val intent = Intent(this.activity, PurchasedActivity::class.java)
+            intent.putExtra("compra", id)
+
             compra.cardProductImage.setOnClickListener {
-                val intent = Intent(this.activity, PurchasedActivity::class.java)
-                intent.putExtra("compra", id)
                 startActivity(intent)
             }
-            binding.purchasesContainer.addView(compra.root)
+            compra.cardProductTitle.setOnClickListener {
+                startActivity(intent)
+            }
+            compra.cardProductPrice.setOnClickListener {
+                startActivity(intent)
+            }
 
+            binding.purchasesContainer.addView(compra.root)
+            counter+=1
         }
     }
 

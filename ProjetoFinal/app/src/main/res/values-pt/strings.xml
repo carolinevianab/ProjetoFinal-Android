@@ -37,4 +37,7 @@
     <string name="catOther">Outros</string>
     <string name="description">Descrição</string>
     <string name="bookCoverDescription">Capa do livro</string>
+    <string name="activeUser">Logado como:</string>
+    <string name="sign_out">Sair</string>
+    <string name="purchase">Compra #</string>
 </resources>

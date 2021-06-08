@@ -34,11 +34,10 @@ class PurchasedActivity : AppCompatActivity() {
             finish()
         }
 
+
         val extra = intent.getStringExtra("compra")
 
         val user = getUser()
-        val databese = FirebaseDatabase.getInstance().reference.child("Compras").child("Users")
-                .child(user!!.uid).child("Compra").child(extra!!).child("Books")
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
@@ -48,7 +47,6 @@ class PurchasedActivity : AppCompatActivity() {
         val service = retrofit.create(ProductService::class.java)
 
         val call = service.getAllBooks("${user!!.uid}/Compra/${extra!!}/Books")
-        //Log.e("teste", extra.toString())
 
         val callback = object : Callback<List<BooksBought>> {
             override fun onFailure(call: Call<List<BooksBought>>, t: Throwable) {
@@ -108,7 +106,6 @@ class PurchasedActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful){
                         val product = response.body()
-                        Log.e("teste", product.toString())
                         updateUI(product)
                     }
                 }
@@ -130,7 +127,7 @@ class PurchasedActivity : AppCompatActivity() {
         card.cardProductTitle.text = book.Titulo
         val price = String.format("%.2f",book.preco)
         val priceDiscount = String.format("%.2f", book.preco - book.desconto)
-        card.cardProductPrice.text = "De ${price} por ${priceDiscount}"
+        card.cardProductPrice.text = "${priceDiscount}"
         card.cardBookId.visibility = View.INVISIBLE
         Picasso.get().load(book.Capa).into(card.cardProductImage)
 
