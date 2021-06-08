@@ -20,6 +20,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:background="@android:color/transparent"
             android:elevation="0dp"
+            app:title="@string/profileDrawer"
             />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -42,22 +43,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Usuário ativo"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:text="@string/activeUser"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <TextView
                 android:id="@+id/txtUserData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <Button
                 android:id="@+id/btnSignOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Sign Out" />
+                android:text="@string/sign_out" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

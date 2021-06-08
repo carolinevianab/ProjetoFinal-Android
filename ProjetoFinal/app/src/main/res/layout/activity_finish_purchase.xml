@@ -41,7 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/localEntrega" />
+                android:text="@string/localEntrega"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

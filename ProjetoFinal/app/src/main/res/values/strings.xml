@@ -12,7 +12,7 @@
     <string name="maybeLaterButton">Maybe later</string>
     <string name="logInMessage">Don\'t want to log in now?</string>
     <string name="categoriesMessage">Categories</string>
-    <string name="offersMessage">Sale!</string>
+    <string name="offersMessage">Os mais vendidos:</string>
     <string name="search">Search</string>
     <string name="myPurchases">My Purchases</string>
     <string name="myCart">My Cart</string>
@@ -36,4 +36,6 @@
     <string name="catOther">Other</string>
     <string name="description">Description</string>
     <string name="bookCoverDescription">Book Cover</string>
+    <string name="activeUser">Logged in as:</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

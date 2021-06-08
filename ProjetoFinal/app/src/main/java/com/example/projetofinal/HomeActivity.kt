@@ -31,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.mainContainer, homeFrag)
             .commit()
+        binding.topAppBar.title = "Home"
 
 
 
@@ -68,6 +69,7 @@ class HomeActivity : AppCompatActivity() {
                             .commit()
                     homeFrag.binding.offersContainer.removeAllViews()
                     getFromDatabase()
+                    binding.topAppBar.title = "Home"
                 }
                 R.id.itemCart -> {
                     val cartFrag = CartFragment()
@@ -75,6 +77,7 @@ class HomeActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.mainContainer, cartFrag)
                         .commit()
+                    binding.topAppBar.title = "Cart"
                 }
                 R.id.itemCategory -> {
                     val catFrag = CategoryFragment()
@@ -82,6 +85,7 @@ class HomeActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.mainContainer, catFrag)
                         .commit()
+                    binding.topAppBar.title = "Category"
                 }
                 R.id.itemPurchases -> {
                     val purFrag = PurchasesFragment()
@@ -89,6 +93,7 @@ class HomeActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.mainContainer, purFrag)
                         .commit()
+                    binding.topAppBar.title = "My Purchases"
                 }
                 R.id.itemProfile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
@@ -172,7 +177,11 @@ class HomeActivity : AppCompatActivity() {
             card.cardProductPrice.text = "De ${price} por ${priceDiscount}"
             card.cardBookId.text = productList[i].id.toString()
             card.cardBookId.visibility = View.INVISIBLE
-            Picasso.get().load(productList[i].Capa).into(card.cardProductImage)
+            Picasso.get()
+                .load(productList[i].Capa)
+                .resize(300, 450)
+                .centerCrop()
+                .into(card.cardProductImage)
             homeFrag.setIntent(card)
         }
 
