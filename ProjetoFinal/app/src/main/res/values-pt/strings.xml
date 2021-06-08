@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ProjetoFinal</string>
-    <string name="offersMessage">Ofertas!</string>
+    <string name="offersMessage">The best sellers:</string>
     <string name="categoriesMessage">Categorias</string>
     <string name="logInMessage">Não quer entrar agora?</string>
     <string name="maybeLaterButton">Talvez depois</string>

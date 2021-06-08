@@ -7,15 +7,6 @@
     android:orientation="vertical"
     tools:context=".CategoryFragment">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_weight="0"
-        android:text="@string/categoriesMessage"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,21 +16,23 @@
 
         <Button
             android:id="@+id/btnCategoryAll"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="@string/catAll"
-            style="?attr/materialButtonOutlinedStyle" />
+            android:minHeight="60dip"
+            android:text="@string/catAll" />
 
         <Button
             android:id="@+id/btnCategoryThriller"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="@string/catThriller"
-            style="?attr/materialButtonOutlinedStyle" />
+            android:minHeight="60dip"
+            android:text="@string/catThriller" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,21 +44,23 @@
 
         <Button
             android:id="@+id/btnCategoryFiction"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="@string/catFiction"
-            style="?attr/materialButtonOutlinedStyle" />
+            android:minHeight="60dip"
+            android:text="@string/catFiction" />
 
         <Button
             android:id="@+id/btnCategoryFantasy"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="@string/fantasyCat"
-            style="?attr/materialButtonOutlinedStyle" />
+            android:minHeight="60dip"
+            android:text="@string/fantasyCat" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,21 +72,23 @@
 
         <Button
             android:id="@+id/btnCategorySelfhelp"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="@string/catAutoajuda"
-            style="?attr/materialButtonOutlinedStyle" />
+            android:minHeight="60dip"
+            android:text="@string/catAutoajuda" />
 
         <Button
             android:id="@+id/btnCategoryOther"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="@string/catOther"
-            style="?attr/materialButtonOutlinedStyle" />
+            android:minHeight="60dip"
+            android:text="@string/catOther" />
     </LinearLayout>
 
 </LinearLayout>

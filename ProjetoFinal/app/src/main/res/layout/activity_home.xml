@@ -27,7 +27,8 @@
                 style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
                 android:background="@android:color/transparent"
                 android:elevation="0dp"
-                app:menu="@menu/main_menu"/>
+                app:menu="@menu/main_menu"
+                app:title=""/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
