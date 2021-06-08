@@ -40,4 +40,8 @@
     <string name="activeUser">Logado como:</string>
     <string name="sign_out">Sair</string>
     <string name="purchase">Compra #</string>
+    <string name="about_this_app">Sobre esse App</string>
+    <string name="quantity">quantidade</string>
+    <string name="about_text"></string>
+    <string name="credits">Creditos:</string>
 </resources>

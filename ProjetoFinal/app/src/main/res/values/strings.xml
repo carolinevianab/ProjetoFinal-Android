@@ -12,7 +12,7 @@
     <string name="maybeLaterButton">Maybe later</string>
     <string name="logInMessage">Don\'t want to log in now?</string>
     <string name="categoriesMessage">Categories</string>
-    <string name="offersMessage">Os mais vendidos:</string>
+    <string name="offersMessage">Best sellers:</string>
     <string name="search">Search</string>
     <string name="myPurchases">My Purchases</string>
     <string name="myCart">My Cart</string>
@@ -39,4 +39,8 @@
     <string name="activeUser">Logged in as:</string>
     <string name="sign_out">Sign Out</string>
     <string name="purchase">Purchase #</string>
+    <string name="about_this_app">About this App</string>
+    <string name="quantity">quantity</string>
+    <string name="about_text">This application ...</string>
+    <string name="credits">Credits:</string>
 </resources>

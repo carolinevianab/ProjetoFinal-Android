@@ -96,6 +96,14 @@ class HomeActivity : AppCompatActivity() {
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                 }
+                R.id.itemAbout -> {
+                    val aboutFrag = AboutFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.mainContainer, aboutFrag)
+                        .commit()
+                    binding.topAppBar.title = getString(R.string.about_this_app)
+                }
 
             }
             binding.drawerLayout.closeDrawer(binding.navigationView)

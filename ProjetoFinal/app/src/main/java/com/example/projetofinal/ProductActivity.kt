@@ -62,30 +62,46 @@ class ProductActivity : AppCompatActivity() {
     fun updateCart(info: Produto?, book: String){
         Thread{
             val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
-            val p = db.Produto_carrinhoDAO().listNote(book.toInt())
+            val p = db.Produto_carrinhoDAO().listProduct(book.toInt())
             runOnUiThread {
                 if(info != null) {
-                    if (p == null) {
-                        val id = book.toInt()
-                        val title = info.Titulo
-                        val price = (String.format("%.2f", info.preco - info.desconto)).toDouble()
-                        val img = info.Capa
+                    val qnt = binding.editQuantity.text
+                    if(qnt.isNotBlank() && qnt.toString().toInt() > 0) {
+                        if (p == null) { // INSERT; Se não existir o produto no carrinho.
+                            val id = book.toInt()
+                            val title = info.Titulo
+                            val price =
+                                (String.format("%.2f", info.preco - info.desconto)).toDouble()
+                            val img = info.Capa
+                            val qnt = binding.editQuantity.text.toString().toInt()
 
-                        val product = Produto_carrinho(id, title, price, 1, img)
+                            val product = Produto_carrinho(id, title, price, qnt, img)
 
-                        insertIntoCart(product)
-                        Toast.makeText(this, "added to cart", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Thread {
-                            val db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
-                            val product = db.Produto_carrinhoDAO().listNote(book.toInt())
-                            runOnUiThread {
-                                val q = product.qtde
-                                product.qtde = q + 1
-                                updateProductQuantity(product)
-                                Toast.makeText(this, "already added to cart, adding one more", Toast.LENGTH_LONG).show()
-                            }
-                        }.start()
+                            insertIntoCart(product)
+                            Toast.makeText(this, "added to cart", Toast.LENGTH_SHORT).show()
+                        } else { // UPDATE; Se existir o produto no carrinho.
+                            Thread {
+                                val db = Room.databaseBuilder(this, AppDataBase::class.java, "db")
+                                    .build()
+                                val product = db.Produto_carrinhoDAO().listProduct(book.toInt())
+                                runOnUiThread {
+                                    val qnt = binding.editQuantity.text.toString()
+                                    product.qtde += qnt.toInt()
+                                    updateProductQuantity(product)
+                                    Toast.makeText(
+                                        this,
+                                        "already added to cart, adding $qnt more",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }.start()
+                        }
+                    }else{
+                        Toast.makeText(
+                            this,
+                            "Please, specify quantity",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }

@@ -77,12 +77,28 @@
                 android:text="@string/description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-            <Button
-                android:id="@+id/btnAddToCart"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/addToCart" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editQuantity"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:ems="10"
+                    android:hint="@string/quantity"
+                    android:inputType="number"
+                    android:importantForAutofill="no" />
+
+                <Button
+                    android:id="@+id/btnAddToCart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/addToCart" />
+            </LinearLayout>
 
         </LinearLayout>
 

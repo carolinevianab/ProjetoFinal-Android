@@ -30,6 +30,10 @@
                     android:id="@+id/itemPurchases"
                     android:icon="@drawable/shopping_bag"
                     android:title="@string/myPurchasesDrawer" />
+                <item
+                    android:id="@+id/itemAbout"
+                    android:icon="@drawable/ic_baseline_group_24"
+                    android:title="@string/about_this_app" />
             </group>
         </menu>
     </item>
