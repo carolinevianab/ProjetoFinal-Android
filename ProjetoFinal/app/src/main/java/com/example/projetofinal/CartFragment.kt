@@ -61,7 +61,11 @@ class CartFragment : Fragment() {
             cardBinding.cardCartProductTitle.text = it.titulo
             cardBinding.cardCartProductPrice.text = it.preco.toString()
             cardBinding.cardCartQuantity.text = it.qtde.toString()
-            Picasso.get().load(it.capa).into(cardBinding.cardCartProductImage)
+            Picasso.get()
+                .load(it.capa)
+                .resize(300, 450)
+                .centerCrop()
+                .into(cardBinding.cardCartProductImage)
 
             total += (it.preco*it.qtde)
 

@@ -103,7 +103,11 @@ class AllProductsActivity : AppCompatActivity() {
         val price = String.format("%.2f",p.preco)
         val priceDiscount = String.format("%.2f", p.preco - p.desconto)
         card.cardProductPrice.text = "De ${price} por ${priceDiscount}"
-        Picasso.get().load(p.Capa).into(card.cardProductImage)
+        Picasso.get()
+            .load(p.Capa)
+            .resize(300, 450)
+            .centerCrop()
+            .into(card.cardProductImage)
         card.cardBookId.visibility = View.INVISIBLE
 
         val productInfo = Intent(this, ProductActivity::class.java)

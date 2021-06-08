@@ -129,7 +129,11 @@ class PurchasedActivity : AppCompatActivity() {
         val priceDiscount = String.format("%.2f", book.preco - book.desconto)
         card.cardProductPrice.text = "${priceDiscount}"
         card.cardBookId.visibility = View.INVISIBLE
-        Picasso.get().load(book.Capa).into(card.cardProductImage)
+        Picasso.get()
+            .load(book.Capa)
+            .resize(300, 450)
+            .centerCrop()
+            .into(card.cardProductImage)
 
         binding.purchasesContainer.addView(card.root)
     }

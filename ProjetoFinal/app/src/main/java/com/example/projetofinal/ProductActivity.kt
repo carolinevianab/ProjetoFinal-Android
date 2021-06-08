@@ -160,10 +160,15 @@ class ProductActivity : AppCompatActivity() {
             binding.txtTitleProductDetail.text = info.Titulo
             val oldPrice = String.format("%.2f", info.preco)
             val price = String.format("%.2f", info.preco - info.desconto)
-            binding.txtPriceDetail.text = "De \$ $oldPrice \nPor $price"
-            Picasso.get().load(info.Capa).into(binding.imgProductDetail)
+            binding.txtPriceDetail.text = "${getString(R.string.saleOldPrice)}: \$ ${oldPrice} \n${getString(R.string.saleNewPrice)}: \$ ${price}"
+            Picasso.get()
+                .load(info.Capa)
+                .resize(400, 550)
+                .centerCrop()
+                .into(binding.imgProductDetail)
+
             binding.txtDescriptionDetail.text = "Autor: ${info.Autor}\n" +
-                    "Categoria: ${info.Categoria}\n" +
+                    "${getString(R.string.categoryDrawer)}: ${info.Categoria}\n" +
                     "Número de páginas: ${info.numPag}\n\n${info.Descricao}"
         }
     }
