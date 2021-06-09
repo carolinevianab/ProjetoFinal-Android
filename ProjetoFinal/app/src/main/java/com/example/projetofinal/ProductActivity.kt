@@ -76,7 +76,7 @@ class ProductActivity : AppCompatActivity() {
             val p = db.Produto_carrinhoDAO().listProduct(book.toInt())
             runOnUiThread {
                 if(info != null) {
-                    val qnt = binding.editQuantity.text
+                    val qnt = binding.editQuantity.text!!
                     if(qnt.isNotBlank() && qnt.toString().toInt() > 0) {
                         if (p == null) { // INSERT; Se não existir o produto no carrinho.
                             val id = book.toInt()
@@ -172,6 +172,7 @@ class ProductActivity : AppCompatActivity() {
         binding.cardDescription.visibility = View.INVISIBLE
         binding.editQuantity.visibility = View.INVISIBLE
         binding.btnAddToCart.visibility = View.INVISIBLE
+        binding.outlinedTextField.visibility = View.INVISIBLE
     }
 
     fun progressInvisible(){
@@ -182,6 +183,7 @@ class ProductActivity : AppCompatActivity() {
         binding.cardDescription.visibility = View.VISIBLE
         binding.editQuantity.visibility = View.VISIBLE
         binding.btnAddToCart.visibility = View.VISIBLE
+        binding.outlinedTextField.visibility = View.VISIBLE
     }
 
     fun updateUI(info: Produto?){

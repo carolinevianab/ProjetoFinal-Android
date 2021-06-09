@@ -133,7 +133,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <EditText
+                <!-- <EditText
                     android:id="@+id/editQuantity"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -141,7 +141,28 @@
                     android:ems="10"
                     android:hint="@string/quantity"
                     android:inputType="number"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no" /> -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlinedTextField"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/quantity"
+                    android:inputType="number"
+                    android:importantForAutofill="no"
+                    android:ems="10"
+                    android:layout_margin="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:importantForAutofill="no"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/btnAddToCart"

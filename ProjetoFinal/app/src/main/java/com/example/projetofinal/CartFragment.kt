@@ -33,6 +33,11 @@ class CartFragment : Fragment() {
                     updateActivity()
 
                 }
+                else if (result.resultCode == Activity.RESULT_CANCELED){
+                    binding.txtEmptyCart.visibility = View.VISIBLE
+                    binding.btnEndPurchase.isEnabled = false
+                    binding.txtEmptyCart.text = getString(R.string.notLogged)
+                }
 
             }
 

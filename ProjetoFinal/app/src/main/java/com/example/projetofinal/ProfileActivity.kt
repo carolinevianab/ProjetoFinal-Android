@@ -33,6 +33,10 @@ class ProfileActivity : AppCompatActivity() {
                     val data: Intent? = result.data
                     updateUser(getUser()!!)
                 }
+                else if (result.resultCode == Activity.RESULT_CANCELED){
+                    binding.btnSignOut.isEnabled = false
+                    binding.txtUserData.text = getString(R.string.notLogged)
+                }
 
             }
 
