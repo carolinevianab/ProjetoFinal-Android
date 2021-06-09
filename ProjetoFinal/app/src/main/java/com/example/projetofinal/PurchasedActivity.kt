@@ -36,6 +36,7 @@ class PurchasedActivity : AppCompatActivity() {
 
 
         val extra = intent.getStringExtra("compra")
+        binding.txtPurchaseDetails.text = "ID: $extra"
 
         val user = getUser()
 
@@ -127,7 +128,7 @@ class PurchasedActivity : AppCompatActivity() {
         card.cardProductTitle.text = book.Titulo
         val price = String.format("%.2f",book.preco)
         val priceDiscount = String.format("%.2f", book.preco - book.desconto)
-        card.cardProductPrice.text = "${priceDiscount}"
+        card.cardProductPrice.text = "\$ ${priceDiscount}"
         card.cardBookId.visibility = View.INVISIBLE
         Picasso.get()
             .load(book.Capa)

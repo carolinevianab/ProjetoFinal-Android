@@ -20,6 +20,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:background="@android:color/transparent"
             android:elevation="0dp"
+            app:title="@string/product"
             />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -40,7 +40,10 @@
     <string name="sign_out">Sign Out</string>
     <string name="purchase">Purchase #</string>
     <string name="about_this_app">About this App</string>
-    <string name="quantity">quantity</string>
+    <string name="quantity">Quantity</string>
     <string name="about_text">This application ...</string>
     <string name="credits">Credits:</string>
+    <string name="product">Product</string>
+    <string name="author">Author</string>
+    <string name="numPag">Pages</string>
 </resources>

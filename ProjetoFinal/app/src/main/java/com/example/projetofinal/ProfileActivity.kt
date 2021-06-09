@@ -33,7 +33,7 @@ class ProfileActivity : AppCompatActivity() {
         else {
             val text = """
                 |Nome: ${user.displayName.toString()}
-                |E-mail: ${user.email.toString()} """".trimMargin("|")
+                |E-mail: ${user.email.toString()} """.trimMargin("|")
             binding.txtUserData.text = text
         }
 

@@ -71,6 +71,6 @@ class CartFragment : Fragment() {
 
             binding.cartContainer.addView(cardBinding.root)
         }
-        binding.txtSubtotal.text = String.format("%.2f", total)
+        binding.txtSubtotal.text = "$" + String.format("%.2f", total)
     }
 }

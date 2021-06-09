@@ -41,7 +41,10 @@
     <string name="sign_out">Sair</string>
     <string name="purchase">Compra #</string>
     <string name="about_this_app">Sobre esse App</string>
-    <string name="quantity">quantidade</string>
-    <string name="about_text"></string>
+    <string name="quantity">Quantidade</string>
+    <string name="about_text">Essa aplicação</string>
     <string name="credits">Creditos:</string>
+    <string name="product">Produto</string>
+    <string name="author">Autor</string>
+    <string name="numPag">Páginas</string>
 </resources>

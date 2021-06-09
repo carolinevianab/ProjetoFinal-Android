@@ -22,7 +22,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:background="@android:color/transparent"
             android:elevation="0dp"
-            app:title="cat"
+            app:title="@string/product"
             />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -32,13 +32,15 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:animateLayoutChanges="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:animateLayoutChanges="true">
 
             <ProgressBar
                 android:id="@+id/progressDetails"
@@ -70,13 +72,62 @@
                 android:text="$0,00"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
-                android:id="@+id/txtDescriptionDetail"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
                 android:layout_margin="8dp"
-                android:text="@string/description"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                app:strokeWidth="1dp"
+                app:strokeColor="#4B5A5A5A"
+                android:id="@+id/cardDescription"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Title, secondary and supporting text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtDescriptionDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/description"
+                        android:visibility="gone"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/btnReadMore"
+                            android:text="Ler mais"
+                            style="?attr/borderlessButtonStyle"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

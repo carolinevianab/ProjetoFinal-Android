@@ -2,6 +2,7 @@ package com.example.projetofinal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.TransitionManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -41,6 +42,16 @@ class ProductActivity : AppCompatActivity() {
         binding.btnAddToCart.setOnClickListener{
             if (book != null) {
                 getBookInfo(book, 1)
+            }
+        }
+
+        binding.btnReadMore.setOnClickListener {
+            TransitionManager.beginDelayedTransition(binding.cardDescription)
+            if (binding.txtDescriptionDetail.visibility == View.GONE) {
+                binding.txtDescriptionDetail.visibility = View.VISIBLE
+            }
+            else {
+                binding.txtDescriptionDetail.visibility = View.GONE
             }
         }
     }
@@ -120,7 +131,7 @@ class ProductActivity : AppCompatActivity() {
 
         val callback = object : Callback<Produto> {
             override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
-                binding.progressDetails.visibility = View.INVISIBLE
+                progressInvisible()
                 if (response.isSuccessful) {
                     val product = response.body()
                     if(i == 0) {
@@ -141,7 +152,7 @@ class ProductActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Produto>, t: Throwable) {
-                binding.progressDetails.visibility = View.INVISIBLE
+                progressInvisible()
                 Snackbar.make(
                     binding.txtDescriptionDetail,
                     "Não foi possível atualizar os produtos.",
@@ -152,7 +163,28 @@ class ProductActivity : AppCompatActivity() {
             }
         }
         call.enqueue(callback)
+        progressVisible()
+
+    }
+
+    fun progressVisible(){
         binding.progressDetails.visibility = View.VISIBLE
+        binding.imgProductDetail.visibility = View.INVISIBLE
+        binding.txtTitleProductDetail.visibility = View.INVISIBLE
+        binding.txtPriceDetail.visibility = View.INVISIBLE
+        binding.cardDescription.visibility = View.INVISIBLE
+        binding.editQuantity.visibility = View.INVISIBLE
+        binding.btnAddToCart.visibility = View.INVISIBLE
+    }
+
+    fun progressInvisible(){
+        binding.progressDetails.visibility = View.INVISIBLE
+        binding.imgProductDetail.visibility = View.VISIBLE
+        binding.txtTitleProductDetail.visibility = View.VISIBLE
+        binding.txtPriceDetail.visibility = View.VISIBLE
+        binding.cardDescription.visibility = View.VISIBLE
+        binding.editQuantity.visibility = View.VISIBLE
+        binding.btnAddToCart.visibility = View.VISIBLE
     }
 
     fun updateUI(info: Produto?){
@@ -167,9 +199,9 @@ class ProductActivity : AppCompatActivity() {
                 .centerCrop()
                 .into(binding.imgProductDetail)
 
-            binding.txtDescriptionDetail.text = "Autor: ${info.Autor}\n" +
+            binding.txtDescriptionDetail.text = "${getString(R.string.author)}: ${info.Autor}\n" +
                     "${getString(R.string.categoryDrawer)}: ${info.Categoria}\n" +
-                    "Número de páginas: ${info.numPag}\n\n${info.Descricao}"
+                    "${getString(R.string.numPag)}: ${info.numPag}\n\n${info.Descricao}"
         }
     }
 }
