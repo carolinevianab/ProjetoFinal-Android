@@ -1,16 +1,21 @@
 package com.example.projetofinal
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.room.Room
 import com.example.projetofinal.DB.AppDataBase
 import com.example.projetofinal.databinding.CardCartItemBinding
 import com.example.projetofinal.databinding.FragmentCartBinding
 import com.example.projetofinal.model.Produto_carrinho
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
 
 
@@ -20,18 +25,46 @@ class CartFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCartBinding.inflate(inflater)
 
-        binding.btnEndPurchase.setOnClickListener {
-            val i = Intent(activity, FinishPurchaseActivity::class.java)
-            startActivity(i)
+
+        if (getUser() == null) {
+            val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+                if (result.resultCode == Activity.RESULT_OK){
+                    val data: Intent? = result.data
+                    updateActivity()
+
+                }
+
+            }
+
+            val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
+            val intent = AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(providers)
+                    .build()
+
+            startForResult.launch(intent)
+        }
+        else {
+            updateActivity()
         }
 
         return binding.root
     }
 
+    fun updateActivity(){
+        binding.btnEndPurchase.setOnClickListener {
+            val i = Intent(activity, FinishPurchaseActivity::class.java)
+            startActivity(i)
+        }
+        refreshProducts()
+    }
+
     override fun onResume() {
         super.onResume()
 
-        refreshProducts()
+        if (getUser() != null) {
+            refreshProducts()
+        }
     }
 
     fun refreshProducts(){
@@ -49,8 +82,10 @@ class CartFragment : Fragment() {
 
         if(products.isNotEmpty()){
             binding.txtEmptyCart.visibility = View.INVISIBLE
+            binding.btnEndPurchase.isEnabled = true
         }else{
             binding.txtEmptyCart.visibility = View.VISIBLE
+            binding.btnEndPurchase.isEnabled = false
         }
 
         var total = 0.0
@@ -60,7 +95,7 @@ class CartFragment : Fragment() {
 
             cardBinding.cardCartProductTitle.text = it.titulo
             cardBinding.cardCartProductPrice.text = it.preco.toString()
-            cardBinding.cardCartQuantity.text = it.qtde.toString()
+            cardBinding.cardCartQuantity.text = "${getString(R.string.quantity)}: ${it.qtde.toString()}"
             Picasso.get()
                 .load(it.capa)
                 .resize(300, 450)
@@ -72,5 +107,9 @@ class CartFragment : Fragment() {
             binding.cartContainer.addView(cardBinding.root)
         }
         binding.txtSubtotal.text = "$" + String.format("%.2f", total)
+    }
+
+    fun getUser(): FirebaseUser? {
+        return FirebaseAuth.getInstance().currentUser
     }
 }

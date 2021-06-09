@@ -34,8 +34,7 @@ class AllProductsActivity : AppCompatActivity() {
     }
 
     fun getFromDatabase(requestType: String){
-
-        if (binding.allProductsContainer.childCount == 0) {
+        if (binding.allProductsContainer.childCount == 1) {
 
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://projetofinal-android-default-rtdb.firebaseio.com")
@@ -49,10 +48,12 @@ class AllProductsActivity : AppCompatActivity() {
             val callback = object : Callback<List<Produto>> {
                 override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
                     if (response.isSuccessful) {
+                        binding.progressAll.visibility = View.INVISIBLE
                         val productsList = response.body()
                         updateUI(productsList, requestType)
                     }
                     else {
+                        binding.progressAll.visibility = View.INVISIBLE
                         Snackbar.make(
                             binding.allProductsContainer,
                             "Não foi possível conectar-se ao servidor.",
@@ -64,6 +65,7 @@ class AllProductsActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
+                    binding.progressAll.visibility = View.INVISIBLE
                     Snackbar.make(
                         binding.allProductsContainer,
                         "Não foi possível atualizar os produtos.",
@@ -74,7 +76,7 @@ class AllProductsActivity : AppCompatActivity() {
                 }
             }
             call.enqueue(callback)
-
+            binding.progressAll.visibility = View.VISIBLE
         }
     }
 
@@ -97,12 +99,14 @@ class AllProductsActivity : AppCompatActivity() {
 
     }
 
+
+
     fun setCard(p: Produto){
         val card = CardItemBinding.inflate(layoutInflater)
         card.cardProductTitle.text = p.Titulo
         val price = String.format("%.2f",p.preco)
         val priceDiscount = String.format("%.2f", p.preco - p.desconto)
-        card.cardProductPrice.text = "De ${price} por ${priceDiscount}"
+        card.cardProductPrice.text = "${getString(R.string.saleOldPrice)} \$ ${price} ${getString(R.string.saleNewPrice)} \$ ${priceDiscount}"
         Picasso.get()
             .load(p.Capa)
             .resize(300, 450)

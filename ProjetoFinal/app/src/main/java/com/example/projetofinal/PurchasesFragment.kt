@@ -1,5 +1,6 @@
 package com.example.projetofinal
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,12 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.projetofinal.databinding.CardItemBinding
 import com.example.projetofinal.databinding.FragmentPurchasesBinding
 import com.example.projetofinal.model.AllPurchases
 import com.example.projetofinal.model.Produto
 import com.example.projetofinal.model.Purchase
 import com.example.projetofinal.services.ProductService
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -33,13 +36,33 @@ class PurchasesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentPurchasesBinding.inflate(inflater)
-        updateList()
 
+        if (getUser() == null) {
+            val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+                if (result.resultCode == Activity.RESULT_OK){
+                    val data: Intent? = result.data
+                    updateList()
+                }
+
+            }
+
+            val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
+            val intent = AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(providers)
+                    .build()
+
+            startForResult.launch(intent)
+        }
+        else {
+            updateList()
+        }
 
         return binding.root
     }
 
     fun updateList(){
+        binding.progressPur.visibility = View.VISIBLE
         val user = getUser()
         val databese = FirebaseDatabase.getInstance().reference.child("Compras").child("Users")
                 .child(user!!.uid).child("Compra")
@@ -65,6 +88,7 @@ class PurchasesFragment : Fragment() {
     }
 
     fun convertData(copiaDados: DataSnapshot){
+        binding.progressPur.visibility = View.INVISIBLE
         var counter = 1
         copiaDados.children.forEach{
             val id = it.key

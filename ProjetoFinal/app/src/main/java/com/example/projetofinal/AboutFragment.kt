@@ -24,16 +24,21 @@ class AboutFragment : Fragment() {
         }
 
         binding.imgMailCarol.setOnClickListener {
-            sendEmail()
+            sendEmail("carolinevb123@gmail.com")
         }
 
         binding.imgMailRichard.setOnClickListener {
-            sendEmail()
+            sendEmail("pdmaccfinalproject@gmail.com")
         }
 
         return binding.root
     }
 
-    fun sendEmail(){
+    fun sendEmail(email: String){
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/html"
+        intent.putExtra(Intent.EXTRA_EMAIL, email)
+
+        startActivity(Intent.createChooser(intent, getString(R.string.sendEmail)))
     }
 }

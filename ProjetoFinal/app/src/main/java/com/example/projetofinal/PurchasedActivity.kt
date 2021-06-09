@@ -66,7 +66,6 @@ class PurchasedActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
                     val productList = response.body()
-                    Log.e("teste", productList.toString())
                     getBooksFromPurchase(productList)
                 }
             }
@@ -107,7 +106,7 @@ class PurchasedActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful){
                         val product = response.body()
-                        updateUI(product)
+                        updateUI(product, it.qtd)
                     }
                 }
 
@@ -120,7 +119,7 @@ class PurchasedActivity : AppCompatActivity() {
 
 
 
-    fun updateUI(book: Produto?){
+    fun updateUI(book: Produto?, qtd: Int){
         if (book == null){
             return
         }
@@ -129,7 +128,8 @@ class PurchasedActivity : AppCompatActivity() {
         val price = String.format("%.2f",book.preco)
         val priceDiscount = String.format("%.2f", book.preco - book.desconto)
         card.cardProductPrice.text = "\$ ${priceDiscount}"
-        card.cardBookId.visibility = View.INVISIBLE
+        card.cardBookId.text = "${getString(R.string.quantity)}: $qtd"
+        card.cardBookId.textSize = 14.toFloat()
         Picasso.get()
             .load(book.Capa)
             .resize(300, 450)

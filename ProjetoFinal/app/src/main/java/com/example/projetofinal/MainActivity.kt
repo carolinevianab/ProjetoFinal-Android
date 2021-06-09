@@ -17,6 +17,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
+            if (result.resultCode == Activity.RESULT_OK){
+                val data: Intent? = result.data
+                // Faz algo
+                goToHome()
+            }
+
+        }
+
         if (getUser() == null) {
             binding.btnLogin.setOnClickListener {
                 val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
@@ -37,15 +46,6 @@ class MainActivity : AppCompatActivity() {
         binding.btnMaybeLater.setOnClickListener {
             goToHome()
         }
-    }
-
-    val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
-        if (result.resultCode == Activity.RESULT_OK){
-            val data: Intent? = result.data
-            // Faz algo
-            goToHome()
-        }
-
     }
 
     fun goToHome(){

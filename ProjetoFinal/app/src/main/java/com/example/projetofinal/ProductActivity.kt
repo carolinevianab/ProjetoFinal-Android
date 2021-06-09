@@ -89,7 +89,7 @@ class ProductActivity : AppCompatActivity() {
                             val product = Produto_carrinho(id, title, price, qnt, img)
 
                             insertIntoCart(product)
-                            Toast.makeText(this, "added to cart", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(binding.btnAddToCart, getString(R.string.addedCart), Snackbar.LENGTH_SHORT).show()
                         } else { // UPDATE; Se existir o produto no carrinho.
                             Thread {
                                 val db = Room.databaseBuilder(this, AppDataBase::class.java, "db")
@@ -99,20 +99,17 @@ class ProductActivity : AppCompatActivity() {
                                     val qnt = binding.editQuantity.text.toString()
                                     product.qtde += qnt.toInt()
                                     updateProductQuantity(product)
-                                    Toast.makeText(
-                                        this,
-                                        "already added to cart, adding $qnt more",
-                                        Toast.LENGTH_LONG
-                                    ).show()
+                                    Snackbar.make(binding.btnAddToCart,
+                                        "${getString(R.string.alreadyInCart)} $qnt",
+                                        Snackbar.LENGTH_SHORT).show()
+
                                 }
                             }.start()
                         }
                     }else{
-                        Toast.makeText(
-                            this,
-                            "Please, specify quantity",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Snackbar.make(binding.btnAddToCart,
+                            getString(R.string.specifyQuantity),
+                            Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }

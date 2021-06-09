@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProjetoFinal</string>
     <string name="offersMessage">The best sellers:</string>
     <string name="categoriesMessage">Categorias</string>
     <string name="logInMessage">Não quer entrar agora?</string>
@@ -42,9 +41,14 @@
     <string name="purchase">Compra #</string>
     <string name="about_this_app">Sobre esse App</string>
     <string name="quantity">Quantidade</string>
-    <string name="about_text">Essa aplicação</string>
+    <string name="about_text">\"Line Shard\" foi desenvolvido como projeto final da matéria de Programação Para Dispositivos Móveis do 5° Semestre do curso de Ciência da Computação.</string>
     <string name="credits">Creditos:</string>
     <string name="product">Produto</string>
     <string name="author">Autor</string>
     <string name="numPag">Páginas</string>
+    <string name="sendEmail">Enviar Email</string>
+    <string name="addedCart">Adicionado ao carrinho</string>
+    <string name="alreadyInCart">Já adicionado ao carrinho, adicionando mais</string>
+    <string name="specifyQuantity">Por favor, especifique a quantidade.</string>
+    <string name="name">Nome</string>
 </resources>
