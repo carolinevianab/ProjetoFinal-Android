@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="offersMessage">The best sellers:</string>
+    <string name="offersMessage">Os mais vendidos:</string>
     <string name="categoriesMessage">Categorias</string>
     <string name="logInMessage">Não quer entrar agora?</string>
     <string name="maybeLaterButton">Talvez depois</string>
@@ -52,4 +52,5 @@
     <string name="specifyQuantity">Por favor, especifique a quantidade.</string>
     <string name="name">Nome</string>
     <string name="notLogged">Você não está logado.</string>
+    <string name="read_more">Ler mais</string>
 </resources>

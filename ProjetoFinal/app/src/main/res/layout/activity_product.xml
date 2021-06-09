@@ -93,9 +93,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description"
-                        android:textAppearance="?attr/textAppearanceHeadline6"
-                        />
+                        android:text="@string/description"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
 
                     <TextView
                         android:id="@+id/txtDescriptionDetail"
@@ -111,13 +110,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnReadMore"
+                            style="?attr/borderlessButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/btnReadMore"
-                            android:text="Ler mais"
-                            style="?attr/borderlessButtonStyle"
-                            />
+                            android:text="@string/read_more" />
                     </LinearLayout>
 
                 </LinearLayout>
